@@ -1,10 +1,14 @@
 package com.ytg123.songsounds;
 
+import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.ytg123.songsounds.util.ModVars;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.command.argument.IdentifierArgumentType;
+import net.minecraft.loot.LootManager;
 import net.minecraft.server.command.CommandManager;
+import net.minecraft.server.command.CommandSource;
+import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.Level;
@@ -26,13 +30,17 @@ public class SongSounds implements ModInitializer {
     public void onInitialize() {
         log(Level.INFO, "Initializing");
         CommandRegistrationCallback.EVENT.register((dispacher, dedicated) -> {
+            final SuggestionProvider<ServerCommandSource>
+                    SUGGESTION_PROVIDER = (commandContext, suggestionsBuilder) -> CommandSource.suggestIdentifiers(SongManager.INSTANCE.getSongIDs(), suggestionsBuilder);
+
             dispacher.register(CommandManager.literal("togglesounds").requires(source -> source.hasPermissionLevel(2)).executes(context -> {
                 ModVars.isEnabled = !ModVars.isEnabled;
                 context.getSource().sendFeedback(new TranslatableText("text.songsounds.toggled", ModVars.isEnabled), true);
                 return 1;
             }));
             dispacher.register(CommandManager.literal("switchsound").requires(source -> source.hasPermissionLevel(2)).then(CommandManager.argument("song",
-                    IdentifierArgumentType.identifier())).executes(context -> {
+                    IdentifierArgumentType.identifier()).suggests(SUGGESTION_PROVIDER)).executes(context -> {
+                        // TODO: Switch Sound command
                 return 1;
             }));
         });

@@ -14,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Map;
+import java.util.Set;
 
 public class SongManager extends JsonDataLoader {
     public static final SongManager INSTANCE = new SongManager();
@@ -41,5 +42,9 @@ public class SongManager extends JsonDataLoader {
 
     public Song getSong(Identifier id) {
         return this.songs.getOrDefault(id, Song.EMPTY);
+    }
+
+    public Set<Identifier> getSongIDs() {
+        return songs.keySet();
     }
 }
