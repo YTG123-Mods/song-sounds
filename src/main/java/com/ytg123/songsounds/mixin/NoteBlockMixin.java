@@ -105,7 +105,7 @@ public class NoteBlockMixin {
                     Note.LA_2,
                     Note.SOL_2,
                     Note.DO_1 // I just wanna tell you how I'm feeling
-            };
+            }; // This is hardcoded for the moment, as I'm going to change it when I get datapacks working
 
     @Unique
     private static int index = 0;

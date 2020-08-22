@@ -1,0 +1,13 @@
+{
+    "name": "Example Song",
+    "sections": [
+        {
+            "name": "Intro",
+            "notes": [
+                "C_1",
+                "F_1",
+                "G_2"
+            ]
+        }
+    ]
+}

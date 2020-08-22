@@ -1,9 +1,9 @@
 package com.ytg123.songsounds.util;
 
-import com.google.gson.*;
+import com.ytg123.songsounds.SongSounds;
+import org.apache.logging.log4j.Level;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Type;
 
 public abstract class Note {
     public static final float FA_1 = 0.943874f;
@@ -25,9 +25,18 @@ public abstract class Note {
     public static final float E_1 = MI_1;
 
 
-    public static float fromString(String src) throws NoSuchFieldException, IllegalAccessException {
-        Field field = Note.class.getDeclaredField(src);
+    public static float fromString(String src) {
+        Field field = null;
+        try {
+            field = Note.class.getDeclaredField(src);
+        } catch (NoSuchFieldException e) {
+            SongSounds.log(Level.INFO, "Note " + src + " Doesn't exist!");
+        }
         field.setAccessible(true);
-        return (float)field.get(null);
+        try {
+            return (float)field.get(null);
+        } catch (IllegalAccessException e) {
+            return Float.NaN;
+        }
     }
 }
