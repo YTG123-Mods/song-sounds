@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "songsounds",
+  "version": "${version}",
+  "name": "Song Sounds",
+  "description": "Makes every Note Block sound a song!",
+  "authors": [
+    "YTG123"
+  ],
+  "contributors": [],
+  "contact": {},
+  "license": "LGPL-3.0",
+  "icon": "assets/songsounds/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.ytg123.songsounds.SongSounds"
+    ],
+    "client": [],
+    "server": []
+  },
+  "mixins": [
+    "songsounds.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.9.2",
+    "fabric": "*"
+  }
+}
