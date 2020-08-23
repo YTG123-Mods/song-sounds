@@ -1,6 +1,7 @@
 package com.ytg123.songsounds;
 
 import com.mojang.brigadier.suggestion.SuggestionProvider;
+import com.ytg123.songsounds.song.Song;
 import com.ytg123.songsounds.util.ModVars;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
@@ -29,13 +30,13 @@ public class SongSounds implements ModInitializer {
     @Override
     public void onInitialize() {
         log(Level.INFO, "Initializing");
-        CommandRegistrationCallback.EVENT.register((dispacher, dedicated) -> {
+        CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
             final SuggestionProvider<ServerCommandSource>
                     SUGGESTION_PROVIDER =
                     (commandContext, suggestionsBuilder) -> CommandSource.suggestIdentifiers(SongManager.INSTANCE.getSongIDs(),
                             suggestionsBuilder);
 
-            dispacher.register(CommandManager.literal("togglesongs")
+            dispatcher.register(CommandManager.literal("togglesongs")
                     .requires(source -> source.hasPermissionLevel(2))
                     .executes(context -> {
                         ModVars.isEnabled = !ModVars.isEnabled;
@@ -43,15 +44,50 @@ public class SongSounds implements ModInitializer {
                                 .sendFeedback(new TranslatableText("text.songsounds.toggled", ModVars.isEnabled), true);
                         return 1;
                     }));
-            dispacher.register(CommandManager.literal("switchsong")
-                    .requires(source -> source.hasPermissionLevel(2))
-                    .then(CommandManager.argument("song",
-                            IdentifierArgumentType.identifier()).suggests(SUGGESTION_PROVIDER))
-                    .executes(context -> {
-                        ModVars.currentSong =
-                                SongManager.INSTANCE.getSong(IdentifierArgumentType.getIdentifier(context, "song"));
-                        return 1;
-                    }));
+            dispatcher.register(
+                    CommandManager.literal(
+                            "switchsong"
+                    ).then(
+                            CommandManager.argument(
+                                    "id",
+                                    IdentifierArgumentType.identifier()
+                            ).suggests(
+                                    SUGGESTION_PROVIDER
+                            ).executes(
+                                    context -> {
+                                        Song song = SongManager.INSTANCE.getSong(IdentifierArgumentType.getIdentifier(
+                                                context,
+                                                "id"));
+
+                                        if (song == null || song.equals(Song.EMPTY) || IdentifierArgumentType.getIdentifier(
+                                                context,
+                                                "id").equals(Song.EMPTY_ID)) {
+                                            context.getSource().sendError(new TranslatableText("error.songsounds.emptysong"));
+                                            return 0;
+                                        } else if (song.sections == null || song.sections.length <= 0) {
+                                            context.getSource().sendError(new TranslatableText("error.songsounds.nosections"));
+                                            return 0;
+                                        } else if (song.sections[0].notes == null || song.sections[0].notes.length <= 0) {
+                                            context.getSource().sendError(new TranslatableText("error.songsounds.nonotes"));
+                                            return 0;
+                                        } else if (song.equals(ModVars.currentSong)) {
+                                            context.getSource().sendError(new TranslatableText("error.songsounds.same", song.name));
+                                            return 0;
+                                        } else if (song.name == null) {
+                                            context.getSource().sendError(new TranslatableText("error.songsounds.other"));
+                                            return 0;
+                                        }
+
+                                        ModVars.currentSong = song;
+                                        ModVars.index = 0;
+                                        ModVars.section = 0;
+
+                                        context.getSource().sendFeedback(new TranslatableText("text.songsounds.switched", song.name), true);
+                                        return 1;
+                                    }
+                            )
+                    )
+            );
         });
         ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(SongManager.INSTANCE);
     }

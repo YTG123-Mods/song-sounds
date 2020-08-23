@@ -1,3 +1,9 @@
 {
-    "text.songsounds.toggled": "Toggled Sounds to %s"
+    "text.songsounds.toggled": "Toggled Songs to %s",
+    "text.songsounds.switched": "Switched song to %s",
+    "error.songsounds.emptysong": "The song you tried to switch to is empty.",
+    "error.songsounds.nosections": "The song you tried to switch to had no sections.",
+    "error.songsounds.nonotes": "The first section of the song you tried to switch to didn't have any notes.",
+    "error.songsounds.other": "An error was encountered",
+    "error.songsounds.same": "Song %s was already the current song"
 }

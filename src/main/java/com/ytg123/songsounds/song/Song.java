@@ -14,7 +14,7 @@ public class Song {
     public Section[] sections;
 
     public static final Identifier EMPTY_ID = new Identifier(SongSounds.MOD_ID, "empty");
-    public static final Song EMPTY = new Song(null, new Section[0]);
+    public static final Song EMPTY = new Song(null, (Section[]) null);
 
     private Song(String name, Section... sections) {
         this.name = name;

@@ -6,7 +6,12 @@ public final class ModVars {
     public static boolean isEnabled;
     public static Song currentSong;
 
+    public static int index;
+    public static int section;
+
     static {
         isEnabled = true;
+        index = 0;
+        section = 0;
     }
 }
