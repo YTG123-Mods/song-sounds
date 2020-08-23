@@ -5,7 +5,7 @@ Song Sounds aims to be a fun way to play songs.
 Any note block contraptions you had before will turn into a mess, unless you toggle off the mod by using `/togglesongs`
 
 ## How to install
-Just follwo the instructions on [FabricMC's website](https://fabricmc.net/use), install [Fabric API](https://curseforge.com/minecraft/mc-mods/fabric-api), and install this mod.
+Just follow the instructions on [FabricMC's website](https://fabricmc.net/use), install [Fabric API](https://curseforge.com/minecraft/mc-mods/fabric-api), and install this mod.
 
 ## Usage and Features
 There aren't a lot of built-in songs in this mod, but there are some.
@@ -15,14 +15,14 @@ There aren't a lot of built-in songs in this mod, but there are some.
 * When you play a note, the mod forces the noteblock to play the next note in the current song!
 * Once the song is over, it will just start again.
 
-Note: The mod will completely ignore unknown notes (aside from a little warning in the game console). Useful for when you want to mark where specific lines are in songs. Look at `src/main/resources/data/songsounds/songs/rickroll.json` for an example.
+Note: The mod will completely ignore unknown notes (aside from a little warning in the game console). Useful for when you want to mark where specific lines are in songs. Look at src/main/resources/data/songsounds/songs/rickroll.json for an example.
 
 ### How to switch songs
 This mod adds a command, `/switchsong <song>`, which allows you to switch to another song!
 You need to have at least permission level 2 (The same permission level as command blocks).
 
 Note: You can't switch to the `songsounds:empty` song, it is used internally. <br />
-Note 2: Each time you `/reload`, the song is switched to `songsounds:rickroll` and the note and section are turned into `0`.
+Note 2: Each time you `/reload`, the song is changed to `songsounds:rickroll` and the note and section are turned into `0`.
 
 ### How to switch to a specific note
 This mod adds a command, `/switchnote <section> <note>`, which allows you to switch to a note (specified by `<note>`), in a section speficied by `<section>`.
