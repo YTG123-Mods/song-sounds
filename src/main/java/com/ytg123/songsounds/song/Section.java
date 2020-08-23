@@ -38,7 +38,7 @@ public class Section {
                     field.setAccessible(true);
                     floatingNotes[i] = (float) field.get(null);
                 } catch (NoSuchFieldException | IllegalAccessException e) {
-                    SongSounds.log(Level.INFO, "Datapack declared note " + notes[i] + ", which is invalid!");
+                    SongSounds.log(Level.WARN, "Datapack declared note " + notes[i] + ", which is unknown!");
                     floatingNotes[i] = ModVars.NoSuchNote;
                 }
             }
