@@ -33,11 +33,11 @@ public class SongManager extends JsonDataLoader {
         JsonElement elm = loader.remove(Song.EMPTY_ID);
 
         loader.forEach((identifier, element) -> {
-            Song song = (Song)GSON.fromJson(element, Song.class);
+            Song song = GSON.fromJson(element, Song.class);
             builder.put(identifier, song);
         });
         builder.put(Song.EMPTY_ID, Song.EMPTY);
-        ImmutableMap<Identifier, Song> map = builder.build();
+        this.songs = builder.build();
     }
 
     public Song getSong(Identifier id) {

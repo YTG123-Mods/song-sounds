@@ -17,6 +17,8 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
+import java.util.Arrays;
+
 import static com.ytg123.songsounds.SongSounds.MOD_ID;
 import static com.ytg123.songsounds.SongSounds.log;
 
@@ -120,7 +122,8 @@ public class NoteBlockMixin {
                           SoundCategory category,
                           float volume,
                           float pitch) {
-        log(Level.INFO, SongManager.INSTANCE.getSong(new Identifier(MOD_ID, "rickroll")).name);
+        log(Level.INFO,
+                Arrays.toString(SongManager.INSTANCE.getSong(new Identifier(MOD_ID, "example")).sections[0].notes));
         if (ModVars.isEnabled) {
             if (!self.isClient()) {
                 if (index >= notes.length) {
