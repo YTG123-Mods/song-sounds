@@ -37,7 +37,7 @@ public class SongSounds implements ModInitializer {
                     (commandContext, suggestionsBuilder) -> CommandSource.suggestIdentifiers(SongManager.INSTANCE.getSongIDs(),
                             suggestionsBuilder);
 
-            dispatcher.register(CommandManager.literal("togglesongs")
+            dispatcher.register(CommandManager.literal("songsounds")
                     .requires(source -> source.hasPermissionLevel(2))
                     .executes(context -> {
                         ModVars.isEnabled = !ModVars.isEnabled;
@@ -47,7 +47,7 @@ public class SongSounds implements ModInitializer {
                     }));
             dispatcher.register(
                     CommandManager.literal(
-                            "switchsong"
+                            "setsong"
                     ).then(
                             CommandManager.argument(
                                     "id",
@@ -101,7 +101,7 @@ public class SongSounds implements ModInitializer {
                     )
             );
             dispatcher.register(CommandManager.literal(
-                    "switchnote"
+                    "note"
             ).then(
                     CommandManager.argument("section",
                     IntegerArgumentType.integer(0)
