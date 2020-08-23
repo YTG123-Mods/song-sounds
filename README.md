@@ -19,7 +19,7 @@ There aren't a lot of built-in songs in this mod, but there are some.
 This mod adds a command, `/switchsong <song>`, which allows you to switch to another song!
 You need to have at least permission level 2 (The same permission level as command blocks).
 
-Note: You can't switch to the `songsounds:empty` song, it is used internally.
+Note: You can't switch to the `songsounds:empty` song, it is used internally. <br />
 Note 2: Each time you `/reload`, the song is switched to `songsounds:rickroll` and the note and section are turned into `0`.
 
 ### How to switch to a specific note
