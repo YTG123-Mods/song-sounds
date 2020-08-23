@@ -2,7 +2,7 @@
     "required": true,
     "package": "com.ytg123.songsounds.mixin",
     "compatibilityLevel": "JAVA_8",
-    "mixins": ["NoteBlockMixin", "ServerResourceManagerMixin"],
+    "mixins": ["NoteBlockMixin"],
     "client": [],
     "server": [],
     "injectors": {

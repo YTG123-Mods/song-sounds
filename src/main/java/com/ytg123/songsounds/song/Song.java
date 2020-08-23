@@ -4,8 +4,10 @@ import com.google.gson.*;
 import com.ytg123.songsounds.SongSounds;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
+import org.apache.logging.log4j.Level;
 
 import java.lang.reflect.Type;
+import java.util.Arrays;
 
 public class Song {
     public String name;
@@ -25,7 +27,10 @@ public class Song {
                 JsonObject jsonObject = JsonHelper.asObject(jsonElement, "song");
                 String name = JsonHelper.getString(jsonObject, "name");
                 Section[] sections = JsonHelper.deserialize(jsonObject, "sections", new Section[0], jsonDeserializationContext, Section[].class);
-                return new Song(name, sections);
+                Song output = new Song(name, sections);
+                SongSounds.log(Level.INFO, "Successfully deserialized a JSON song object, name is " + output.name + ", sections are " +
+                        Arrays.toString(output.sections));
+                return output;
         }
 
         public JsonElement serialize(Song song, Type type, JsonSerializationContext jsonSerializationContext) {
