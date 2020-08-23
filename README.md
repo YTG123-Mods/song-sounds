@@ -15,7 +15,7 @@ There aren't a lot of built-in songs in this mod, but there are some.
 * When you play a note, the mod forces the noteblock to play the next note in the current song!
 * Once the song is over, it will just start again.
 
-Note: The mod will completely ignore unknown notes (aside from a little warning in the game console). Useful for when you want to mark where specific lines are in songs. Look at src/main/resources/data/songsounds/songs/rickroll.json for an example.
+Note: The mod will completely ignore unknown notes (aside from a little warning in the game console). Useful for when you want to mark where specific lines are in songs. Look at [src/main/resources/data/songsounds/songs/rickroll.json](https://github.com/YTG1234/song-sounds/blob/master/src/main/resources/data/songsounds/songs/rickroll.json) for an example.
 
 ### How to switch songs
 This mod adds a command, `/switchsong <song>`, which allows you to switch to another song!
