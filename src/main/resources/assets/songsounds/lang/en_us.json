@@ -5,5 +5,6 @@
     "error.songsounds.nosections": "The song you tried to switch to had no sections.",
     "error.songsounds.nonotes": "The first section of the song you tried to switch to didn't have any notes.",
     "error.songsounds.other": "An error was encountered",
-    "error.songsounds.same": "Song %s was already the current song"
+    "error.songsounds.same": "Song %s was already the current song",
+    "text.songsounds.switchednote": "Switched to Note %s in Section %s aka %s (In song %s)"
 }

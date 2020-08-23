@@ -1,5 +1,6 @@
 package com.ytg123.songsounds;
 
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.ytg123.songsounds.song.Song;
 import com.ytg123.songsounds.util.ModVars;
@@ -59,22 +60,31 @@ public class SongSounds implements ModInitializer {
                                                 context,
                                                 "id"));
 
-                                        if (song == null || song.equals(Song.EMPTY) || IdentifierArgumentType.getIdentifier(
-                                                context,
-                                                "id").equals(Song.EMPTY_ID)) {
-                                            context.getSource().sendError(new TranslatableText("error.songsounds.emptysong"));
+                                        if (song == null ||
+                                                song.equals(Song.EMPTY) ||
+                                                IdentifierArgumentType.getIdentifier(
+                                                        context,
+                                                        "id").equals(Song.EMPTY_ID)) {
+                                            context.getSource()
+                                                    .sendError(new TranslatableText("error.songsounds.emptysong"));
                                             return 0;
                                         } else if (song.sections == null || song.sections.length <= 0) {
-                                            context.getSource().sendError(new TranslatableText("error.songsounds.nosections"));
+                                            context.getSource()
+                                                    .sendError(new TranslatableText("error.songsounds.nosections"));
                                             return 0;
-                                        } else if (song.sections[0].notes == null || song.sections[0].notes.length <= 0) {
-                                            context.getSource().sendError(new TranslatableText("error.songsounds.nonotes"));
+                                        } else if (song.sections[0].notes == null ||
+                                                song.sections[0].notes.length <= 0) {
+                                            context.getSource()
+                                                    .sendError(new TranslatableText("error.songsounds.nonotes"));
                                             return 0;
                                         } else if (song.equals(ModVars.currentSong)) {
-                                            context.getSource().sendError(new TranslatableText("error.songsounds.same", song.name));
+                                            context.getSource()
+                                                    .sendError(new TranslatableText("error.songsounds.same",
+                                                            song.name));
                                             return 0;
                                         } else if (song.name == null) {
-                                            context.getSource().sendError(new TranslatableText("error.songsounds.other"));
+                                            context.getSource()
+                                                    .sendError(new TranslatableText("error.songsounds.other"));
                                             return 0;
                                         }
 
@@ -82,12 +92,31 @@ public class SongSounds implements ModInitializer {
                                         ModVars.index = 0;
                                         ModVars.section = 0;
 
-                                        context.getSource().sendFeedback(new TranslatableText("text.songsounds.switched", song.name), true);
+                                        context.getSource()
+                                                .sendFeedback(new TranslatableText("text.songsounds.switched",
+                                                        song.name), true);
                                         return 1;
                                     }
                             )
                     )
             );
+            dispatcher.register(CommandManager.literal(
+                    "switchnote"
+            ).then(
+                    CommandManager.argument("section",
+                    IntegerArgumentType.integer(0)
+                    ).then(
+                            CommandManager.argument("note", IntegerArgumentType.integer(0)
+                            ).executes(
+                                    context -> {
+                                        ModVars.section = IntegerArgumentType.getInteger(context, "section");
+                                        ModVars.index = IntegerArgumentType.getInteger(context, "note");
+                                        context.getSource().sendFeedback(new TranslatableText("text.songsounds.switchednote", IntegerArgumentType.getInteger(context, "note"), IntegerArgumentType.getInteger(context, "section"), ModVars.currentSong.sections[IntegerArgumentType.getInteger(context, "section")].name, ModVars.currentSong.name), true);
+                                        return 1;
+                                    }
+                            )
+                    )
+            ));
         });
         ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(SongManager.INSTANCE);
     }
