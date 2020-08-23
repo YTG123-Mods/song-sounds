@@ -7,5 +7,5 @@ Song Sounds aims to be a fun way to play songs.
 ```
 lul
 
-## All other thing
+## All other things
 [Wiki](https://github.com/YTG1234/song-sounds/wiki)
