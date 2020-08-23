@@ -9,6 +9,8 @@ public final class ModVars {
     public static int index;
     public static int section;
 
+    public static final float NoSuchNote = 12234647.364f;
+
     static {
         isEnabled = true;
         index = 0;

@@ -2,12 +2,14 @@ package com.ytg123.songsounds.song;
 
 import com.google.gson.*;
 import com.ytg123.songsounds.SongSounds;
+import com.ytg123.songsounds.util.ModVars;
 import com.ytg123.songsounds.util.Note;
 import net.minecraft.util.JsonHelper;
 import org.apache.logging.log4j.Level;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+import java.util.Arrays;
 
 public class Section {
     public String name;
@@ -36,11 +38,14 @@ public class Section {
                     field.setAccessible(true);
                     floatingNotes[i] = (float) field.get(null);
                 } catch (NoSuchFieldException | IllegalAccessException e) {
-                    SongSounds.log(Level.FATAL, "Datapack declared note " + notes[i] + ", which is invalid! Exiting!");
-                    throw new RuntimeException("Could not find note " + notes[i]);
+                    SongSounds.log(Level.INFO, "Datapack declared note " + notes[i] + ", which is invalid!");
+                    floatingNotes[i] = ModVars.NoSuchNote;
                 }
             }
-            return new Section(name, floatingNotes);
+            Section output = new Section(name, floatingNotes);
+            SongSounds.log(Level.DEBUG, "Successfully deserialized a JSON section object, name is " + output.name + ", notes are " +
+                    Arrays.toString(output.notes));
+            return output;
         }
     }
 }

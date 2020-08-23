@@ -28,7 +28,7 @@ public class Song {
                 String name = JsonHelper.getString(jsonObject, "name");
                 Section[] sections = JsonHelper.deserialize(jsonObject, "sections", new Section[0], jsonDeserializationContext, Section[].class);
                 Song output = new Song(name, sections);
-                SongSounds.log(Level.INFO, "Successfully deserialized a JSON song object, name is " + output.name + ", sections are " +
+                SongSounds.log(Level.DEBUG, "Successfully deserialized a JSON song object, name is " + output.name + ", sections are " +
                         Arrays.toString(output.sections));
                 return output;
         }

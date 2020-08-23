@@ -123,6 +123,16 @@ public class NoteBlockMixin {
                         ModVars.section = 0;
                     }
                 }
+                if (ModVars.currentSong.sections[ModVars.section].notes[ModVars.index] == ModVars.NoSuchNote) {
+                    ModVars.index++;
+                    if (ModVars.index >= ModVars.currentSong.sections[ModVars.section].notes.length) {
+                        ModVars.index = 0;
+                        ModVars.section++;
+                        if (ModVars.section >= ModVars.currentSong.sections.length) {
+                            ModVars.section = 0;
+                        }
+                    }
+                }
                 self.playSound(player,
                         (double) pos.getX() + 0.5D,
                         (double) pos.getY() + 0.5D,

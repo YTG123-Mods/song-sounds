@@ -77,20 +77,4 @@ public abstract class Note {
     public static final float E_2 = MI_2;
     public static final float F_2 = FA_2;
     public static final float F_SHARP_2 = FA_D_2;
-
-
-    public static float fromString(String src) {
-        Field field = null;
-        try {
-            field = Note.class.getDeclaredField(src);
-        } catch (NoSuchFieldException e) {
-            SongSounds.log(Level.INFO, "Note " + src + " Doesn't exist!");
-        }
-        field.setAccessible(true);
-        try {
-            return (float)field.get(null);
-        } catch (IllegalAccessException e) {
-            return Float.NaN;
-        }
-    }
 }
