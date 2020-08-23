@@ -110,3 +110,4 @@ or
     ]
 }
 ```
+You can also put named notes and letter notes in the name song, but why would you?
