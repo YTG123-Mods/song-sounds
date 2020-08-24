@@ -1,10 +1,15 @@
 {
     "text.songsounds.toggled": "Toggled Song Sounds to %s",
+    "text.songsounds.toggledfor": "Toggled Song Sounds to %s for %s",
     "text.songsounds.switched": "Set song to %s",
+    "text.songsounds.switchedfor": "Set song to %s for %s",
     "error.songsounds.emptysong": "The song you tried to set is empty.",
     "error.songsounds.nosections": "The song you tried to set had no sections.",
     "error.songsounds.nonotes": "The first section of the song you tried to set didn't have any notes.",
     "error.songsounds.other": "An error was encountered",
     "error.songsounds.same": "Song %s was already the current song",
-    "text.songsounds.switchednote": "Switched to Note %s in Section %s aka %s (In song %s)"
+    "text.songsounds.switchednote": "Switched to Note %s in Section %s aka %s (In song %s)",
+    "text.songsounds.getsong": "%s",
+    "text.songsounds.getsongother": "%s's current song is %s",
+    "text.songsounds.switchednoteother": "Switched to Note %s in Section %s aka %s (In song %s), for player %s"
 }

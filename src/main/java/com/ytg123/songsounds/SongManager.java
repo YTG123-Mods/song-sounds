@@ -78,8 +78,8 @@ public class SongManager implements SimpleSynchronousResourceReloadListener {
         }
         builder.put(Song.EMPTY_ID, Song.EMPTY);
         this.songs = builder.build();
-        ModVars.currentSong = songs.get(new Identifier(SongSounds.MOD_ID, "rickroll"));
-        ModVars.index = 0;
-        ModVars.section = 0;
+        if (ModVars.currentSong == null) {
+            ModVars.currentSong = getSong(new Identifier(SongSounds.MOD_ID, "rickroll"));
+        }
     }
 }

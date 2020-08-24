@@ -4,18 +4,16 @@ import com.ytg123.songsounds.util.ModVars;
 import com.ytg123.songsounds.util.Note;
 import net.minecraft.block.NoteBlock;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import org.apache.logging.log4j.Level;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
-
-import static com.ytg123.songsounds.SongSounds.log;
 
 @Mixin(NoteBlock.class)
 public class NoteBlockMixin {
@@ -116,7 +114,8 @@ public class NoteBlockMixin {
                           float pitch) {
         if (ModVars.isEnabled) {
             if (!self.isClient()) {
-                if (ModVars.index >= ModVars.currentSong.sections[ModVars.section].notes.length) {
+                if (ModVars.index >=
+                        ModVars.currentSong.sections[ModVars.section].notes.length) {
                     ModVars.index = 0;
                     ModVars.section++;
                     if (ModVars.section >= ModVars.currentSong.sections.length) {
