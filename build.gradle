@@ -46,6 +46,19 @@ tasks.withType(JavaCompile) {
 	options.encoding = "UTF-8"
 }
 
+// Ensure that compiling with newer Java versions still warns/fails when using classes
+// or methods only present in versions newer than 8, so we can safely compile with Java 11
+// or 15
+tasks.withType(JavaCompile).configureEach {
+    def targetVersion = 8
+    if (JavaVersion.current().isJava9Compatible()) {
+        it.options.release = targetVersion
+    } else {
+        sourceCompatibility = JavaVersion.toVersion(targetVersion)
+        targetCompatibility = JavaVersion.toVersion(targetVersion)
+    }
+}
+
 // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
 // if it is present.
 // If you remove this task, sources will not be generated.
