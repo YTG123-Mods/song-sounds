@@ -1,6 +1,6 @@
-package com.ytg123.songsounds;
+package io.github.ytg1234.songsounds;
 
-import com.ytg123.songsounds.init.EventListener;
+import io.github.ytg1234.songsounds.init.EventListener;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;

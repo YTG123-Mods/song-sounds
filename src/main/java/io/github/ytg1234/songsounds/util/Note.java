@@ -1,9 +1,4 @@
-package com.ytg123.songsounds.util;
-
-import com.ytg123.songsounds.SongSounds;
-import org.apache.logging.log4j.Level;
-
-import java.lang.reflect.Field;
+package io.github.ytg1234.songsounds.util;
 
 public abstract class Note {
     public static final float FA_1 = 0.943874f;

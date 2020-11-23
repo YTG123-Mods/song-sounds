@@ -14,7 +14,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.ytg123.songsounds.SongSounds"
+      "io.github.ytg1234.songsounds.SongSounds"
     ],
     "client": [],
     "server": []

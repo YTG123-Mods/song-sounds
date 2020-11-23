@@ -1,9 +1,9 @@
-package com.ytg123.songsounds.command;
+package io.github.ytg1234.songsounds.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
-import com.ytg123.songsounds.util.ModVars;
+import io.github.ytg1234.songsounds.util.ModVars;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.TranslatableText;
 

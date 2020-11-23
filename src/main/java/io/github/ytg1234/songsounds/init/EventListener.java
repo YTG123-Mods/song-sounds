@@ -1,9 +1,9 @@
-package com.ytg123.songsounds.init;
+package io.github.ytg1234.songsounds.init;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.ytg123.songsounds.command.NoteCommand;
-import com.ytg123.songsounds.command.SetsongCommand;
-import com.ytg123.songsounds.command.SongsoundsCommand;
+import io.github.ytg1234.songsounds.command.NoteCommand;
+import io.github.ytg1234.songsounds.command.SetsongCommand;
+import io.github.ytg1234.songsounds.command.SongsoundsCommand;
 import net.minecraft.server.command.ServerCommandSource;
 
 public class EventListener {

@@ -1,9 +1,9 @@
-package com.ytg123.songsounds.song;
+package io.github.ytg1234.songsounds.song;
 
 import com.google.gson.*;
-import com.ytg123.songsounds.SongSounds;
-import com.ytg123.songsounds.util.ModVars;
-import com.ytg123.songsounds.util.Note;
+import io.github.ytg1234.songsounds.SongSounds;
+import io.github.ytg1234.songsounds.util.ModVars;
+import io.github.ytg1234.songsounds.util.Note;
 import net.minecraft.util.JsonHelper;
 import org.apache.logging.log4j.Level;
 

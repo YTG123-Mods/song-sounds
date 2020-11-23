@@ -1,6 +1,6 @@
-package com.ytg123.songsounds.mixin;
+package io.github.ytg1234.songsounds.mixin;
 
-import com.ytg123.songsounds.util.ModVars;
+import io.github.ytg1234.songsounds.util.ModVars;
 import net.minecraft.block.NoteBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundCategory;

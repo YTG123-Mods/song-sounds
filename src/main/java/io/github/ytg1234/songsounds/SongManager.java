@@ -1,13 +1,13 @@
-package com.ytg123.songsounds;
+package io.github.ytg1234.songsounds;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.ytg123.songsounds.song.Section;
-import com.ytg123.songsounds.song.Song;
-import com.ytg123.songsounds.util.ModVars;
+import io.github.ytg1234.songsounds.song.Section;
+import io.github.ytg1234.songsounds.song.Song;
+import io.github.ytg1234.songsounds.util.ModVars;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
