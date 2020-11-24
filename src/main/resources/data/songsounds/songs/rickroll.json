@@ -91,7 +91,51 @@
                 "LA_2",
                 "SOL_2",
                 "DO_1",
-                "I just wanna tell you how I'm feeling"
+                "I just wanna tell you how I'm feeling",
+                "C_1",
+                "C_1",
+                "D_1",
+                "E_1",
+                "F_1",
+                "E_1",
+                "G_2",
+                "A_2",
+                "G_2",
+                "Gotta make you understand"
+            ]
+        },
+        {
+            "name": "Chorus",
+            "notes": [
+                "C_1",
+                "D_1",
+                "F_1",
+                "D_1",
+                "A_2",
+                "A_2",
+                "G_2",
+                "Never gonna give you up",
+                "C_1",
+                "C_1",
+                "C_1",
+                "C_1",
+                "G_2",
+                "G_2",
+                "F_2",
+                "Never gonna let you down",
+                "C_1",
+                "D_1",
+                "F_1",
+                "D_1",
+                "F_1",
+                "G_2",
+                "E_1",
+                "D_1",
+                "C_1",
+                "C_1",
+                "G_2",
+                "F_1",
+                "Never gonna run around and desert you"
             ]
         }
     ]

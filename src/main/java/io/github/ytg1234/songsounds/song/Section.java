@@ -3,7 +3,6 @@ package io.github.ytg1234.songsounds.song;
 import com.google.gson.*;
 import io.github.ytg1234.songsounds.SongSounds;
 import io.github.ytg1234.songsounds.util.ModVars;
-import io.github.ytg1234.songsounds.util.Note;
 import net.minecraft.util.JsonHelper;
 import org.apache.logging.log4j.Level;
 
@@ -21,8 +20,7 @@ public class Section {
     }
 
     public static class Serializer implements JsonDeserializer<Section> {
-        @Override public Section deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws
-                JsonParseException {
+        @Override public Section deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
             // Reading notes as String array
             JsonObject jsonObject = JsonHelper.asObject(json, "section");
             String name = JsonHelper.getString(jsonObject, "name");
@@ -34,7 +32,7 @@ public class Section {
             // Populating the float array
             for (int i = 0; i < notes.length; i++) {
                 try {
-                    Field field = Note.class.getField(notes[i]);
+                    Field field = Note.class.getField(notes[i].toUpperCase());
                     field.setAccessible(true);
                     floatingNotes[i] = (float) field.get(null);
                 } catch (NoSuchFieldException | IllegalAccessException e) {
