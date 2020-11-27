@@ -1,6 +1,6 @@
-package io.github.ytg1234.songsounds.song;
+package io.github.ytg1234.songsounds.base.song;
 
-public abstract class Note {
+public abstract class Notes {
     // region Named (Solfége)
     public static final float FA_D_0 = calcNote(-12);
     // region First Octave

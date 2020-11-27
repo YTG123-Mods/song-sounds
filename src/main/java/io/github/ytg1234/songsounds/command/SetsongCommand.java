@@ -4,7 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import io.github.ytg1234.songsounds.SongManager;
-import io.github.ytg1234.songsounds.song.Song;
+import io.github.ytg1234.songsounds.base.song.Song;
 import io.github.ytg1234.songsounds.util.ModVars;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.argument.IdentifierArgumentType;

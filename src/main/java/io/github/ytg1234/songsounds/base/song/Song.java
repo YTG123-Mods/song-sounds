@@ -1,4 +1,4 @@
-package io.github.ytg1234.songsounds.song;
+package io.github.ytg1234.songsounds.base.song;
 
 import com.google.gson.*;
 import io.github.ytg1234.songsounds.SongSounds;

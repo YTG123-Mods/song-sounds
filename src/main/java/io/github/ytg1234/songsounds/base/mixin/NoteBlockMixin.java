@@ -1,4 +1,4 @@
-package io.github.ytg1234.songsounds.mixin;
+package io.github.ytg1234.songsounds.base.mixin;
 
 import io.github.ytg1234.songsounds.util.ModVars;
 import net.minecraft.block.NoteBlock;

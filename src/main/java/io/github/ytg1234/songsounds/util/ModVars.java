@@ -1,6 +1,6 @@
 package io.github.ytg1234.songsounds.util;
 
-import io.github.ytg1234.songsounds.song.Song;
+import io.github.ytg1234.songsounds.base.song.Song;
 
 public final class ModVars {
     public static boolean isEnabled;

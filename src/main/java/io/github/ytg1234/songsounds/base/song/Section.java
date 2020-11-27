@@ -1,4 +1,4 @@
-package io.github.ytg1234.songsounds.song;
+package io.github.ytg1234.songsounds.base.song;
 
 import com.google.gson.*;
 import io.github.ytg1234.songsounds.SongSounds;
@@ -32,7 +32,7 @@ public class Section {
             // Populating the float array
             for (int i = 0; i < notes.length; i++) {
                 try {
-                    Field field = Note.class.getField(notes[i].toUpperCase());
+                    Field field = Notes.class.getField(notes[i].toUpperCase());
                     field.setAccessible(true);
                     floatingNotes[i] = (float) field.get(null);
                 } catch (NoSuchFieldException | IllegalAccessException e) {
