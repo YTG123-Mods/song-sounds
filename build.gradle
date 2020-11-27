@@ -21,6 +21,9 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+	// For anyone wondering, I will use Unweaver (and try to make its custom instruments compatible) when
+	// We get to the 1.17 Pre-Release phase
 }
 
 processResources {
