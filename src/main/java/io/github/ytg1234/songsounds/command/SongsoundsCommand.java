@@ -2,7 +2,7 @@ package io.github.ytg1234.songsounds.command;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
-import io.github.ytg1234.songsounds.util.ModVars;
+import io.github.ytg1234.songsounds.util.SongSoundsUtils;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.TranslatableText;
 
@@ -14,10 +14,10 @@ public class SongsoundsCommand {
     }
 
     private static int execute(CommandContext<ServerCommandSource> ctx) {
-        ModVars.isEnabled = !ModVars.isEnabled;
+        SongSoundsUtils.isEnabled = !SongSoundsUtils.isEnabled;
         ctx.getSource()
                .sendFeedback(new TranslatableText("text.songsounds.toggled",
-                                                  ModVars.isEnabled), true);
+                                                  SongSoundsUtils.isEnabled), true);
         return 1;
     }
 }

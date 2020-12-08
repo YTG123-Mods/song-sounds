@@ -1,6 +1,6 @@
 package io.github.ytg1234.songsounds.base.mixin;
 
-import io.github.ytg1234.songsounds.util.ModVars;
+import io.github.ytg1234.songsounds.util.SongSoundsUtils;
 import net.minecraft.block.NoteBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundCategory;
@@ -18,27 +18,16 @@ public class NoteBlockMixin {
               at = @At(value = "INVOKE",
                        target = "Lnet/minecraft/world/World;playSound(Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/sound/SoundEvent;Lnet/minecraft/sound/SoundCategory;FF)V"))
     public void playSound(
-            World self, @Nullable PlayerEntity player, BlockPos pos, SoundEvent sound, SoundCategory category, float volume, float pitch
+            World self,
+            @Nullable PlayerEntity player,
+            BlockPos pos,
+            SoundEvent sound,
+            SoundCategory category,
+            float volume,
+            float pitch
                          ) {
-        if (ModVars.isEnabled) {
+        if (SongSoundsUtils.isEnabled) {
             if (!self.isClient()) {
-                if (ModVars.index >= ModVars.currentSong.sections[ModVars.section].notes.length) {
-                    ModVars.index = 0;
-                    ModVars.section++;
-                    if (ModVars.section >= ModVars.currentSong.sections.length) {
-                        ModVars.section = 0;
-                    }
-                }
-                if (ModVars.currentSong.sections[ModVars.section].notes[ModVars.index] == ModVars.NoSuchNote) {
-                    ModVars.index++;
-                    if (ModVars.index >= ModVars.currentSong.sections[ModVars.section].notes.length) {
-                        ModVars.index = 0;
-                        ModVars.section++;
-                        if (ModVars.section >= ModVars.currentSong.sections.length) {
-                            ModVars.section = 0;
-                        }
-                    }
-                }
                 self.playSound(
                         player,
                         (double) pos.getX() + 0.5D,
@@ -47,9 +36,8 @@ public class NoteBlockMixin {
                         sound,
                         category,
                         volume,
-                        ModVars.currentSong.sections[ModVars.section].notes[ModVars.index]
+                        SongSoundsUtils.getNextNote()
                               );
-                ModVars.index++;
             }
         } else {
             self.playSound(player, pos, sound, category, volume, pitch);

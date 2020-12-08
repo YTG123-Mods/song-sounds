@@ -5,7 +5,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import io.github.ytg1234.songsounds.SongManager;
 import io.github.ytg1234.songsounds.base.song.Song;
-import io.github.ytg1234.songsounds.util.ModVars;
+import io.github.ytg1234.songsounds.util.SongSoundsUtils;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.argument.IdentifierArgumentType;
 import net.minecraft.server.command.ServerCommandSource;
@@ -36,7 +36,7 @@ public class SetsongCommand {
         } else if (song.sections[0].notes == null || song.sections[0].notes.length <= 0) {
             ctx.getSource().sendError(new TranslatableText("error.songsounds.nonotes"));
             return 0;
-        } else if (song.equals(ModVars.currentSong)) {
+        } else if (song.equals(SongSoundsUtils.currentSong)) {
             ctx.getSource().sendError(new TranslatableText("error.songsounds.same", song.name));
             return 0;
         } else if (song.name == null) {
@@ -44,9 +44,9 @@ public class SetsongCommand {
             return 0;
         }
 
-        ModVars.currentSong = song;
-        ModVars.index = 0;
-        ModVars.section = 0;
+        SongSoundsUtils.currentSong = song;
+        SongSoundsUtils.index = 0;
+        SongSoundsUtils.section = 0;
 
         ctx.getSource().sendFeedback(new TranslatableText("text.songsounds.switched", song.name), true);
         return 1;

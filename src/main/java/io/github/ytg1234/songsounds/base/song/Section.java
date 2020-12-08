@@ -2,7 +2,7 @@ package io.github.ytg1234.songsounds.base.song;
 
 import com.google.gson.*;
 import io.github.ytg1234.songsounds.SongSounds;
-import io.github.ytg1234.songsounds.util.ModVars;
+import io.github.ytg1234.songsounds.util.SongSoundsUtils;
 import net.minecraft.util.JsonHelper;
 import org.apache.logging.log4j.Level;
 
@@ -37,7 +37,7 @@ public class Section {
                     floatingNotes[i] = (float) field.get(null);
                 } catch (NoSuchFieldException | IllegalAccessException e) {
                     SongSounds.log(Level.WARN, "Datapack declared note " + notes[i] + ", which is unknown!");
-                    floatingNotes[i] = ModVars.NoSuchNote;
+                    floatingNotes[i] = SongSoundsUtils.NoSuchNote;
                 }
             }
             Section output = new Section(name, floatingNotes);

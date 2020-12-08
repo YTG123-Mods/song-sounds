@@ -7,7 +7,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.github.ytg1234.songsounds.base.song.Section;
 import io.github.ytg1234.songsounds.base.song.Song;
-import io.github.ytg1234.songsounds.util.ModVars;
+import io.github.ytg1234.songsounds.util.SongSoundsUtils;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.util.Identifier;
@@ -66,8 +66,8 @@ public class SongManager implements SimpleSynchronousResourceReloadListener {
         }
         builder.put(Song.EMPTY_ID, Song.EMPTY);
         this.songs = builder.build();
-        if (ModVars.currentSong == null) {
-            ModVars.currentSong = getSong(new Identifier(SongSounds.MOD_ID, "rickroll"));
+        if (SongSoundsUtils.currentSong == null) {
+            SongSoundsUtils.currentSong = getSong(new Identifier(SongSounds.MOD_ID, "rickroll"));
         }
     }
 

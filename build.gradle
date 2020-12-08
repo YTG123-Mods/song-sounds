@@ -1,49 +1,67 @@
 plugins {
-	id 'fabric-loom' version '0.5-SNAPSHOT'
-	id 'maven-publish'
+    id "fabric-loom" version "0.5-SNAPSHOT"
+    id "maven-publish"
+    id "com.modrinth.minotaur" version "1.1.0"
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
+    maven {
+        name = "Jitpack"
+        url = "https://jitpack.io/"
+    }
 }
 
-archivesBaseName = project.archives_base_name
-version = project.mod_version
-group = project.maven_group
+class Globals {
+    static def mcVer = "1.16.4"
+    static def yarnVer = "7"
+    static def loaderVer = "0.10.8"
+    static def apiVer = "0.27.1+1.16"
+    static def modVer = "4.0.1"
+    static def mavenGroup = "io.github.ytg1234"
+    static def archivesBaseName = "song-sounds"
+
+    static def modrinthId = "3KiJfT85"
+	static String modrinthChangelog = null
+}
+
+archivesBaseName = Globals.archivesBaseName
+version = Globals.modVer
+group = Globals.mavenGroup
 
 minecraft {
 }
 
 dependencies {
-	//to change the versions see the gradle.properties file
-	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    //to change the versions see the gradle.properties file
+    minecraft "com.mojang:minecraft:${Globals.mcVer}"
+    mappings "net.fabricmc:yarn:${Globals.mcVer}+build.${Globals.yarnVer}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${Globals.loaderVer}"
 
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${Globals.apiVer}"
 
-	// For anyone wondering, I will use Unweaver (and try to make its custom instruments compatible) when
-	// We get to the 1.17 Pre-Release phase
+    // For anyone wondering, I will use Unweaver (and try to make its custom instruments compatible) when
+    // We get to the 1.17 Pre-Release phase
 }
 
 processResources {
-	inputs.property "version", project.version
+    inputs.property "version", Globals.modVer
 
-	from(sourceSets.main.resources.srcDirs) {
-		include "fabric.mod.json"
-		expand "version": project.version
-	}
+    from(sourceSets.main.resources.srcDirs) {
+        include "fabric.mod.json"
+        expand "version": Globals.modVer
+    }
 
-	from(sourceSets.main.resources.srcDirs) {
-		exclude "fabric.mod.json"
-	}
+    from(sourceSets.main.resources.srcDirs) {
+        exclude "fabric.mod.json"
+    }
 }
 
 // ensure that the encoding is set to UTF-8, no matter what the system default is
 // this fixes some edge cases with special characters not displaying correctly
 // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
 tasks.withType(JavaCompile) {
-	options.encoding = "UTF-8"
+    options.encoding = "UTF-8"
 }
 
 // Ensure that compiling with newer Java versions still warns/fails when using classes
@@ -63,38 +81,61 @@ tasks.withType(JavaCompile).configureEach {
 // if it is present.
 // If you remove this task, sources will not be generated.
 task sourcesJar(type: Jar, dependsOn: classes) {
-	classifier = "sources"
-	from sourceSets.main.allSource
+    classifier = "sources"
+    from sourceSets.main.allSource
+}
+
+import com.modrinth.minotaur.TaskModrinthUpload
+
+task publishToMR(type: TaskModrinthUpload) {
+    token = System.getenv("MODRINTH_API_TOKEN") // Token
+    // Project Info
+    projectId = Globals.modrinthId
+    versionNumber = Globals.modVer
+    // Files
+    uploadFile = remapJar
+    addFile file("${project.buildDir}/libs/${project.archivesBaseName}-${Globals.modVer}-dev.jar")
+    addFile file("${project.buildDir}/libs/${project.archivesBaseName}-${Globals.modVer}-sources.jar")
+    // Metadata
+    addGameVersion(Globals.mcVer)
+    addLoader("fabric")
+    versionName = "[$Globals.mcVer] $Globals.archivesBaseName $Globals.modVer"
+	changelog = Globals.modrinthChangelog != null && Globals.modrinthChangelog != "" ? Globals.modrinthChangelog : ""
+
+    afterEvaluate {
+        tasks.publishToMR.dependsOn(remapJar)
+        tasks.publishToMR.dependsOn(sourcesJar)
+    }
 }
 
 jar {
-	from "LICENSE"
+    from "LICENSE"
 }
 
 artifacts {
-	archives sourcesJar
+    archives sourcesJar
 }
 
 // configure the maven publication
 publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			// add all the jars that should be included when publishing to maven
-			artifact(jar) {
-				builtBy remapJar
-			}
-			artifact("${project.buildDir.absolutePath}/libs/${archivesBaseName}-${project.version}.jar"){
-				builtBy remapJar
-			}
-			artifact(sourcesJar) {
-				builtBy remapSourcesJar
-			}
-		}
-	}
+    publications {
+        mavenJava(MavenPublication) {
+            // add all the jars that should be included when publishing to maven
+            artifact(jar) {
+                builtBy remapJar
+            }
+            artifact("${project.buildDir.absolutePath}/libs/${archivesBaseName}-${Globals.modVer}.jar") {
+                builtBy remapJar
+            }
+            artifact(sourcesJar) {
+                builtBy remapSourcesJar
+            }
+        }
+    }
 
-	// select the repositories you want to publish to
-	repositories {
-		// uncomment to publish to the local maven
-		// mavenLocal()
-	}
+    // select the repositories you want to publish to
+    repositories {
+        // uncomment to publish to the local maven
+        // mavenLocal()
+    }
 }
