@@ -19,3 +19,7 @@ bin/
 
 #fabric
 run/
+
+# macOS
+.DS_Store
+._*
