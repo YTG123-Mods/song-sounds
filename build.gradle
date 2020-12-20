@@ -16,7 +16,7 @@ class Globals {
     static def mcVer = "1.16.4"
     static def yarnVer = "7"
     static def loaderVer = "0.10.8"
-    static def apiVer = "0.28.1+1.16"
+    static def apiVer = "0.28.3+1.16"
     static def modVer = "4.0.1"
     static def mavenGroup = "io.github.ytg1234"
     static def archivesBaseName = "song-sounds"
