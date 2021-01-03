@@ -35,12 +35,11 @@ object SongManager : SimpleSynchronousResourceReloadListener {
     override fun apply(manager: ResourceManager) {
         val resources = manager.findResources(
             "songs"
-        ) { string: String -> string.endsWith(".json") }
+        ) { it.endsWith(".json") }
         val builder = ImmutableMap.builder<Identifier, Song>()
         for (id in resources) {
             try {
-                val parser = JsonParser()
-                val jsonObj = parser.parse(InputStreamReader(manager.getResource(id).inputStream)) as JsonObject
+                val jsonObj = manager.getResource(id).use { JsonParser().parse(it.inputStream.reader()).asJsonObject }
                 val song = GSON.fromJson(jsonObj, Song::class.java)
 
                 // Removing "songs/" and ".json" from the path
