@@ -1,4 +1,4 @@
-package io.github.ytg1234.songsounds.base.mixin;
+package io.github.ytg1234.songsounds.mixin;
 
 import net.minecraft.server.command.PlaySoundCommand;
 import org.spongepowered.asm.mixin.Mixin;

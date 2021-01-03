@@ -1,12 +1,13 @@
-package io.github.ytg1234.songsounds.base.mixin;
+package io.github.ytg1234.songsounds.mixin;
 
-import io.github.ytg1234.songsounds.util.SongSoundsUtils;
 import net.minecraft.block.NoteBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import io.github.ytg1234.songsounds.util.SongSoundsUtilsKt;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -26,7 +27,7 @@ public class NoteBlockMixin {
             float volume,
             float pitch
                          ) {
-        if (SongSoundsUtils.isEnabled) {
+        if (SongSoundsUtilsKt.isEnabled()) {
             if (!self.isClient()) {
                 self.playSound(
                         player,
@@ -36,7 +37,7 @@ public class NoteBlockMixin {
                         sound,
                         category,
                         volume,
-                        SongSoundsUtils.getNextNote()
+                        SongSoundsUtilsKt.getNextNote()
                               );
             }
         } else {
