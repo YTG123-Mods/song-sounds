@@ -89,13 +89,13 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
 // if it is present.
 // If you remove this task, sources will not be generated.
 task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = "sources"
+    archiveClassifier.set("sources")
     from sourceSets.main.allSource
 }
 
 import com.modrinth.minotaur.TaskModrinthUpload
 
-task publishToMR(type: TaskModrinthUpload) {
+task publishModrinth(type: TaskModrinthUpload) {
     token = System.getenv("MODRINTH_API_TOKEN") // Token
     // Project Info
     projectId = Globals.modrinthId
@@ -108,11 +108,11 @@ task publishToMR(type: TaskModrinthUpload) {
     addGameVersion(Globals.mcVer)
     addLoader("fabric")
     versionName = "[$Globals.mcVer] $Globals.archivesBaseName $Globals.modVer"
-	changelog = Globals.modrinthChangelog != null && Globals.modrinthChangelog != "" ? Globals.modrinthChangelog : ""
+	changelog = Globals.modrinthChangelog != null ? Globals.modrinthChangelog : ""
 
     afterEvaluate {
-        tasks.publishToMR.dependsOn(remapJar)
-        tasks.publishToMR.dependsOn(sourcesJar)
+        tasks.publishModrinth.dependsOn(remapJar)
+        tasks.publishModrinth.dependsOn(sourcesJar)
     }
 }
 
