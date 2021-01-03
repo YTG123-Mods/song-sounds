@@ -145,5 +145,8 @@ publishing {
     repositories {
         // uncomment to publish to the local maven
         // mavenLocal()
+        maven {
+			url = System.getenv("MAVEN_REPO")
+        }
     }
 }
