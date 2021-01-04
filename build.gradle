@@ -21,7 +21,7 @@ class Globals {
     static def flkVer = "1.4.21+build.1"
     static def modVer = "4.0.1"
     static def mavenGroup = "io.github.ytg1234"
-    static def archivesBaseName = "song-sounds"
+    static def archivesBaseName = "songsounds"
 
     static def modrinthId = "3KiJfT85"
 	static String modrinthChangelog = null
@@ -145,8 +145,10 @@ publishing {
     repositories {
         // uncomment to publish to the local maven
         // mavenLocal()
-        maven {
-			url = System.getenv("MAVEN_REPO")
+        if (System.getenv("MAVEN_REPO") != null) {
+        	maven {
+				url = System.getenv("MAVEN_REPO")
+        	}
         }
     }
 }
