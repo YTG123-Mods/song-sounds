@@ -8,4 +8,4 @@ Song Sounds aims to be a fun way to play songs.
 lul
 
 ## All other things
-[Wiki](https://github.com/YTG1234/song-sounds/wiki)
+[Wiki](https://github.com/YTG123-Mods/song-sounds/wiki)

@@ -11,5 +11,6 @@
     "text.songsounds.switchednote": "Switched to Note %s in Section %s aka %s (In song %s)",
     "text.songsounds.getsong": "%s",
     "text.songsounds.getsongother": "%s's current song is %s",
-    "text.songsounds.switchednoteother": "Switched to Note %s in Section %s aka %s (In song %s), for player %s"
+    "text.songsounds.switchednoteother": "Switched to Note %s in Section %s aka %s (In song %s), for player %s",
+    "error.songsounds.nosong": "No song is set."
 }
