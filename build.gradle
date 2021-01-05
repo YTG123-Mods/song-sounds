@@ -8,8 +8,10 @@ plugins {
 repositories {
     mavenCentral()
     maven {
-        name = "Jitpack"
-        url = "https://jitpack.io/"
+        url = "https://oss.sonatype.org/content/repositories/snapshots"
+        content {
+            includeGroup("me.lucko")
+        }
     }
 }
 
@@ -19,7 +21,7 @@ class Globals {
     static def loaderVer = "0.10.8"
     static def apiVer = "0.29.1+1.16"
     static def flkVer = "1.4.21+build.1"
-    static def modVer = "4.1.0"
+    static def modVer = "4.2.0"
     static def mavenGroup = "io.github.ytg1234"
     static def archivesBaseName = "songsounds"
 
@@ -43,6 +45,8 @@ dependencies {
     modImplementation "net.fabricmc.fabric-api:fabric-api:${Globals.apiVer}"
 
     modImplementation "net.fabricmc:fabric-language-kotlin:${Globals.flkVer}"
+
+    modCompileOnly "me.lucko:fabric-permissions-api:0.1-SNAPSHOT" // We don't want it at runtime
 
     // For anyone wondering, I will use Unweaver (and try to make its custom instruments compatible) when
     // We get to the 1.17 Pre-Release phase

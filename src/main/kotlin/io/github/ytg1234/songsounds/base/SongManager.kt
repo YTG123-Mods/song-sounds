@@ -2,18 +2,15 @@ package io.github.ytg1234.songsounds.base
 
 import com.google.common.collect.ImmutableMap
 import com.google.gson.GsonBuilder
-import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import io.github.ytg1234.songsounds.MOD_ID
 import io.github.ytg1234.songsounds.base.song.Section
 import io.github.ytg1234.songsounds.base.song.Song
 import io.github.ytg1234.songsounds.logger
-import io.github.ytg1234.songsounds.util.currentSong
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener
 import net.minecraft.resource.ResourceManager
 import net.minecraft.util.Identifier
 import java.io.IOException
-import java.io.InputStreamReader
 import java.util.regex.Pattern
 
 // lmao this is like a black box for me
@@ -36,7 +33,9 @@ object SongManager : SimpleSynchronousResourceReloadListener {
         val resources = manager.findResources(
             "songs"
         ) { it.endsWith(".json") }
+
         val builder = ImmutableMap.builder<Identifier, Song>()
+
         for (id in resources) {
             try {
                 val jsonObj = manager.getResource(id).use { JsonParser().parse(it.inputStream.reader()).asJsonObject }
@@ -54,16 +53,14 @@ object SongManager : SimpleSynchronousResourceReloadListener {
                 e.printStackTrace()
             }
         }
+
         builder.put(Song.EMPTY_ID, Song.EMPTY)
         songs = builder.build()
-        if (currentSong == null) {
-            currentSong = getSong(Identifier(MOD_ID, "rickroll"))
-        }
     }
 
-    operator fun get(id: Identifier) = songs[id] ?: Song.EMPTY
+    operator fun get(id: Identifier) = getSong(id)
 
-    fun getSong(id: Identifier): Song {
+    private fun getSong(id: Identifier): Song {
         return songs[id] ?: Song.EMPTY
     }
 }
