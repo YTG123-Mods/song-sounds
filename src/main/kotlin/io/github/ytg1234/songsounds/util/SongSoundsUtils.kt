@@ -21,17 +21,9 @@ var section = 0
  *
  * @return The next note.
  */
-fun getNextNote(): Float {
-    // idk what this code does, I wrote this months ago
-    if (index >= currentSong.sections[section].notes.size) {
-        index = 0
-        section++
-        if (section >= currentSong.sections.size) {
-            section = 0
-        }
-    }
-    if (currentSong.sections[section].notes[index] == NO_SUCH_NOTE) {
-        index++
+val nextNote: Float
+    get() {
+        // idk what this code does, I wrote this months ago
         if (index >= currentSong.sections[section].notes.size) {
             index = 0
             section++
@@ -39,11 +31,20 @@ fun getNextNote(): Float {
                 section = 0
             }
         }
+        if (currentSong.sections[section].notes[index] == NO_SUCH_NOTE) {
+            index++
+            if (index >= currentSong.sections[section].notes.size) {
+                index = 0
+                section++
+                if (section >= currentSong.sections.size) {
+                    section = 0
+                }
+            }
+        }
+        val prevIndex = index
+        index++
+        return currentSong.sections[section].notes[prevIndex]
     }
-    val prevIndex = index
-    index++
-    return currentSong.sections[section].notes[prevIndex]
-}
 
 fun setSongIdAndReset(id: Identifier) {
     currentSongId = id

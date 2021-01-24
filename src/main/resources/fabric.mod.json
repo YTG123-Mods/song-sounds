@@ -32,5 +32,8 @@
   },
   "recommends": {
     "luckperms": "*"
+  },
+  "suggests": {
+    "cartses": "*"
   }
 }

@@ -13,13 +13,43 @@ repositories {
             includeGroup("me.lucko")
         }
     }
+
+    maven {
+        name = "CottonMC"
+        url = "https://server.bbkr.space/artifactory/libs-release"
+        content {
+            includeGroup("io.github.cottonmc")
+        }
+    }
+
+    // uncomment down below if you didn't exclude
+//    maven {
+//        name = "AperLambda"
+//        url = "https://aperlambda.github.io/maven"
+//        content {
+//            includeModule("org.aperlambda", "lambdajcommon")
+//        }
+//    }
+
+    maven {
+        url = "https://jitpack.io/"
+        name = "Jitpack"
+        content {
+            includeModule("com.github.BoogieMonster1O1", "cartses")
+            includeModule("com.github.Chocohead", "Fabric-ASM")
+            // uncomment down below if you didn't exclude
+//            includeGroup("com.github.lambdaurora")
+//            includeGroup("com.github.LambdAurora")
+//            includeModule("com.github.jellysquid3", "sodium-fabric")
+        }
+    }
 }
 
 class Globals {
     static def mcVer = "1.16.5"
-    static def yarnVer = "1"
-    static def loaderVer = "0.11.0"
-    static def apiVer = "0.29.3+1.16"
+    static def yarnVer = "3"
+    static def loaderVer = "0.11.1"
+    static def apiVer = "0.29.4+1.16"
     static def flkVer = "1.4.21+build.1"
     static def modVer = "4.2.1"
     static def mavenGroup = "io.github.ytg1234"
@@ -38,18 +68,23 @@ minecraft {
 
 dependencies {
     //to change the versions see the gradle.properties file
-    minecraft "com.mojang:minecraft:${Globals.mcVer}"
-    mappings "net.fabricmc:yarn:${Globals.mcVer}+build.${Globals.yarnVer}:v2"
-    modImplementation "net.fabricmc:fabric-loader:${Globals.loaderVer}"
+    minecraft("com.mojang:minecraft:${Globals.mcVer}")
+    mappings("net.fabricmc:yarn:${Globals.mcVer}+build.${Globals.yarnVer}:v2")
+    modImplementation("net.fabricmc:fabric-loader:${Globals.loaderVer}")
 
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${Globals.apiVer}"
+    modImplementation("net.fabricmc.fabric-api:fabric-api:${Globals.apiVer}")
 
-    modImplementation "net.fabricmc:fabric-language-kotlin:${Globals.flkVer}"
+    modImplementation("net.fabricmc:fabric-language-kotlin:${Globals.flkVer}")
 
-    modCompileOnly "me.lucko:fabric-permissions-api:0.1-SNAPSHOT" // We don't want it at runtime
+    // Compat
+    modCompileOnly("me.lucko:fabric-permissions-api:0.1-SNAPSHOT") // We don't want it at runtime
+    modCompileOnly("com.github.BoogieMonster1O1:cartses:52b3402443a59fa5570f60ac534a0268971e13f6") {
+        exclude(module: "fabric-api")
+        exclude(module: "LambDynamicLights")
+    }
 
     // For anyone wondering, I will use Unweaver (and try to make its custom instruments compatible) when
-    // We get to the 1.17 Pre-Release phase
+    // we get to the 1.17 Pre-Release phase
 }
 
 processResources {
