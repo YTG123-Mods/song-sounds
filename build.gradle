@@ -1,3 +1,12 @@
+buildscript {
+	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath("org.jfrog.buildinfo:build-info-extractor-gradle:4.+")
+	}
+}
+
 plugins {
     id("fabric-loom") version "0.5-SNAPSHOT"
     id("org.jetbrains.kotlin.jvm") version "1.4.21"
@@ -100,16 +109,10 @@ processResources {
     }
 }
 
-// ensure that the encoding is set to UTF-8, no matter what the system default is
-// this fixes some edge cases with special characters not displaying correctly
-// see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
 
-// Ensure that compiling with newer Java versions still warns/fails when using classes
-// or methods only present in versions newer than 8, so we can safely compile with Java 11
-// or 15
 tasks.withType(JavaCompile).configureEach {
     def targetVersion = 8
     if (JavaVersion.current().isJava9Compatible()) {
@@ -135,15 +138,15 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 import com.modrinth.minotaur.TaskModrinthUpload
 
 task publishModrinth(type: TaskModrinthUpload) {
-    token = System.getenv("MODRINTH_API_TOKEN") // Token
-    // Project Info
+    token = System.getenv("MODRINTH_API_TOKEN")
+
     projectId = Globals.modrinthId
     versionNumber = Globals.modVer
-    // Files
+
     uploadFile = remapJar
     addFile file("${project.buildDir}/libs/${project.archivesBaseName}-${Globals.modVer}-dev.jar")
     addFile file("${project.buildDir}/libs/${project.archivesBaseName}-${Globals.modVer}-sources.jar")
-    // Metadata
+
     addGameVersion(Globals.mcVer)
     addLoader("fabric")
     versionName = "[$Globals.mcVer] $Globals.archivesBaseName $Globals.modVer"
@@ -163,11 +166,9 @@ artifacts {
     archives sourcesJar
 }
 
-// configure the maven publication
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            // add all the jars that should be included when publishing to maven
             artifact(jar) {
                 builtBy remapJar
             }
@@ -179,15 +180,6 @@ publishing {
             }
         }
     }
-
-    // select the repositories you want to publish to
-    repositories {
-        // uncomment to publish to the local maven
-        // mavenLocal()
-        if (System.getenv("MAVEN_REPO") != null) {
-        	maven {
-				url = System.getenv("MAVEN_REPO")
-        	}
-        }
-    }
 }
+
+apply from: "https://raw.githubusercontent.com/YTG1234/scripts/main/scripts/gradle/artifactory.gradle"
